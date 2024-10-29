@@ -7,6 +7,6 @@ output:
     theme: cerulean
 ---
 
-# About Me
+# Experience
 
-This is the landing page.
+This is the experience page.
