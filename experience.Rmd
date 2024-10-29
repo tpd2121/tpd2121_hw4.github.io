@@ -9,4 +9,15 @@ output:
 
 # Experience
 
-This is the experience page.
+## Education
+
+* **Master of Public Health (MPH)**, Columbia University, 2023-2025
+  * Health Promotion Research and Practice Certificate
+* **Bachelor of Science (B.Sc)**, Indonesia International Institute for Life Sciences, 2016 - 2020
+  * Biomedical Science, Infectious Disease
+
+## Work experience
+
+* **Technical Assistant**, Australia Indonesia Health Security Partnership, ID
+* **Science Officer**, Summit Institute for Development, ID
+* **Product Excecutive**, Enseval Medika Prima, ID

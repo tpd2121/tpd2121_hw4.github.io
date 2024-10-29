@@ -9,4 +9,6 @@ output:
 
 # About Me
 
-This is the landing page.
+This is the landing page. This website is made for HW4 of p8105 class Fall 2024. On this website, you can find more info about my experience as well as contact information (email, github, and linkedin).
+
+![](https://media1.tenor.com/m/LrGE6umEeSgAAAAC/thank-you-alice-in-wonderland.gif)
