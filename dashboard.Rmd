@@ -32,7 +32,7 @@ rest_inspec =
 Column {data-width=450}
 -----------------------------------------------------------------------
 
-### Asian Food Inspection Grade in Manhattan
+### Restaurant's Grades`
 
 ```{r chart 1}
 rest_inspec %>% 
@@ -43,7 +43,7 @@ rest_inspec %>%
   layout(showlegend = FALSE)
 ```
 
-### Score of Asian Food in Manhattan
+### Inspection Score Distribution based on Cuisine type
 
 ```{r chart 2}
 rest_inspec %>% 
@@ -64,7 +64,7 @@ rest_inspec %>%
   select(cuisine_description, year, score) %>% 
   group_by(year, cuisine_description) %>% 
   summarize(mean_score = mean(score, na.rm = TRUE)) %>%
-#it doesn't group by properly
+  #I can't get the lines to appear
   plot_ly(x = ~year, y = ~mean_score, type = 'scatter', mode = 'lines+markers', color = ~cuisine_description, colors = 'viridis')
 ```
 
