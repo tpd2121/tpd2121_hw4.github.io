@@ -6,6 +6,8 @@ output:
     vertical_layout: fill
 ---
 
+The following dashboard show the data from NYC restaurant grade, for Asian food in Manhattan
+
 ```{r setup, include=FALSE}
 library(flexdashboard)
 library(tidyverse)
@@ -21,11 +23,13 @@ attr(rest_inspec, 'spec') <- NULL
 
 rest_inspec = 
   rest_inspec %>% 
-  select(-building, -camis, -dba, -phone, -inspection_date, -record_date, -street, -grade_date, -violation_code) %>% 
-  drop_na()
+  separate_wider_delim(grade_date, "-", names = c("year", "month", "date")) %>%
+  mutate(year = as.numeric(year)) %>% 
+  select(-building, -camis, -dba, -phone, -inspection_date, -record_date, -street, -violation_code, -month, -date) %>% 
+  drop_na() 
 ```
  
-Column {data-width=650}
+Column {data-width=450}
 -----------------------------------------------------------------------
 
 ### Asian Food Inspection Grade in Manhattan
@@ -39,10 +43,6 @@ rest_inspec %>%
   layout(showlegend = FALSE)
 ```
 
-
-Column {data-width=350}
------------------------------------------------------------------------
-
 ### Score of Asian Food in Manhattan
 
 ```{r chart 2}
@@ -52,10 +52,19 @@ rest_inspec %>%
   layout(showlegend = FALSE)
 ```
 
-### Chart C
+Column {data-width=550}
+-----------------------------------------------------------------------
+
+### Average score based on grading year
 
 ```{r chart 3}
 rest_inspec %>% 
-  filter (boro == "MANHATTAN", cuisine_description %in% c("Afghan", "Asian", "Bangladeshi", "Chinese/Japanese", "Chinese", "Japanese", "Indonesian", "Pakistani", "Filipino", "Indian", "Korean", "Pakistani", "Thai", "Vietnamese/Cambodian/Malaysia"))
+  filter (boro == "MANHATTAN", cuisine_description %in% c("Afghan", "Asian", "Bangladeshi", "Chinese/Japanese", "Chinese", "Japanese", "Indonesian", "Pakistani", "Filipino", "Indian", "Korean", "Pakistani", "Thai", "Vietnamese/Cambodian/Malaysia")) %>% 
+  mutate(score = as.numeric(score))  %>%
+  select(cuisine_description, year, score) %>% 
+  group_by(year, cuisine_description) %>% 
+  summarize(mean_score = mean(score, na.rm = TRUE)) %>%
+#it doesn't group by properly
+  plot_ly(x = ~year, y = ~mean_score, type = 'scatter', mode = 'lines+markers', color = ~cuisine_description, colors = 'viridis')
 ```
 
